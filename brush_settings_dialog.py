@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QDialog, QColorDialog
-from PyQt5.QtGui import QColor
 from PyQt5 import uic
 
 
@@ -23,9 +22,7 @@ class BrushSettingsDialog(QDialog):
     def select_color(self):
         color = QColorDialog.getColor()
         if color.isValid():
-            # get hex color
-            self.color = QColor(*color.getRgb())
-
+            self.color = color
             self.btn_brush_color.setStyleSheet(f"background-color: {color.name()};")
             self.btn_brush_color.setText(color.name())
 

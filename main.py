@@ -52,9 +52,7 @@ class Window(QMainWindow):
         }
         self.eraser_setting = {"size": 12, "color": QColor(255, 255, 255)}
 
-        self.current_tool = BrushTool(
-            self.brush_settings.get("color"), self.brush_settings.get("size")
-        )
+        self.current_tool = BrushTool(self.brush_settings.get("color"), self.brush_settings.get("size"))
 
     def open_files_history(self):
         files_history_dialog = FilesHistoryDialog()
@@ -70,17 +68,13 @@ class Window(QMainWindow):
 
         painter = QPainter(new_image)
         painter.drawImage(0, 0, self.image, 0, 0)
-
         self.image = new_image
-
         painter.end()
         self.update()
 
     def fill_tool_bar(self):
         for icon_alias, icon_file_name in ICONS.items():
-            action = QAction(
-                QIcon(os.path.join(ICONS_DIR, icon_file_name)), icon_alias, self
-            )
+            action = QAction(QIcon(os.path.join(ICONS_DIR, icon_file_name)), icon_alias, self)
             self.tool_bar.addAction(action)
             action.triggered.connect(self.select_tool)
 
@@ -104,7 +98,7 @@ class Window(QMainWindow):
             self.last_point = event.pos()
 
             if (
-                not self.drawing_figure and isinstance(self.current_tool, FigureTool)
+                    not self.drawing_figure and isinstance(self.current_tool, FigureTool)
             ) or (not self.selecting and isinstance(self.current_tool, SelectionTool)):
                 # Start drawing sub figure
                 self.ghost_figure_begin = event.pos()
@@ -145,7 +139,7 @@ class Window(QMainWindow):
     def mouseMoveEvent(self, event):
         if event.buttons() and Qt.LeftButton and self.drawing:
             if isinstance(self.current_tool, BrushTool) or isinstance(
-                self.current_tool, EraserTool
+                    self.current_tool, EraserTool
             ):
                 self.previous_image = self.image.copy()
 
@@ -165,9 +159,8 @@ class Window(QMainWindow):
                 painter.end()
                 self.update()
 
-        if (self.drawing_figure and isinstance(self.current_tool, FigureTool)) or (
-            self.selecting and isinstance(self.current_tool, SelectionTool)
-        ):
+        if ((self.drawing_figure and isinstance(self.current_tool, FigureTool)) or
+                (self.selecting and isinstance(self.current_tool, SelectionTool))):
             # Update figure ghost
             self.ghost_figure_end = event.pos()
             self.update()
@@ -294,8 +287,8 @@ class Window(QMainWindow):
         screen_size = QApplication.primaryScreen().size()
 
         if (
-            pixmap.width() > screen_size.width()
-            and pixmap.height() > screen_size.height()
+                pixmap.width() > screen_size.width()
+                and pixmap.height() > screen_size.height()
         ):
             if pixmap.height() > pixmap.width():
                 return pixmap.scaledToHeight(screen_size.height())
