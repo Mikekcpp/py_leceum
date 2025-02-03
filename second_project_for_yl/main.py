@@ -1,9 +1,11 @@
+# Импортируем библиотеки
 import pygame
 import sys
 import random
 
 pygame.init()
 
+# Размеры окна и цвета
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 600
 FPS = 20
@@ -11,6 +13,7 @@ BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 ADD_NEW_FLAME_RATE = 25
 
+# Изображения
 cactus_img = pygame.image.load("data/cactus_bricks.png")
 fire_img = pygame.image.load("data/fire_bricks.png")
 cactus_img_rect = cactus_img.get_rect()
@@ -26,6 +29,7 @@ pygame.display.set_caption("Mario")
 selected_character = None
 
 
+# Класс для рекордов
 class Topscore:
     def __init__(self):
         self.high_score = 0
@@ -39,6 +43,7 @@ class Topscore:
 topscore = Topscore()
 
 
+# Класс для Дракона
 class Dragon:
     dragon_velocity = 10
 
@@ -67,6 +72,7 @@ class Dragon:
             self.dragon_img_rect.top += self.dragon_velocity
 
 
+# Класс для Огня
 class Flames:
     flames_velocity = 20
 
@@ -84,6 +90,7 @@ class Flames:
             self.flames_img_rect.left -= self.flames_velocity
 
 
+# Класс для Марио
 class Mario:
     velocity = 10
 
@@ -107,6 +114,7 @@ class Mario:
             self.rect.bottom += 10
 
 
+# Класс для Луиджи
 class Luigi:
     velocity = 10
 
@@ -130,6 +138,7 @@ class Luigi:
             self.rect.bottom += 10
 
 
+# Класс для Бонуса
 class Bonus:
     def __init__(self):
         self.image = pygame.image.load("data/bonus.png")
@@ -142,6 +151,7 @@ class Bonus:
         canvas.blit(self.image, self.rect)
 
 
+# Функция для выборра персонажа
 def character_selection():
     global selected_character
     while True:
@@ -177,6 +187,7 @@ def character_selection():
         pygame.display.update()
 
 
+# Функция для проверки уровня
 def check_level(SCORE):
     global LEVEL
     if SCORE in range(0, 10):
@@ -197,6 +208,7 @@ def check_level(SCORE):
         LEVEL = 4
 
 
+# Функция для супер эффекта и неожиданнаго его появления
 def surprise_effect():
     surprise_img = pygame.image.load("data/бу.webp")
     surprise_img_rect = surprise_img.get_rect()
@@ -217,6 +229,7 @@ def surprise_effect():
                 sys.exit()
 
 
+# Функция для начала игры
 def start_game():
     canvas.fill(BLACK)
     start_img = pygame.image.load("data/start.png")
@@ -236,6 +249,7 @@ def start_game():
         pygame.display.update()
 
 
+# Основной игровой цикл
 def game_loop():
     character_selection()
 
@@ -380,6 +394,7 @@ def game_loop():
             CLOCK.tick(FPS)
 
 
+# Функция для обработки конца игры
 def game_over():
     pygame.mixer.music.stop()
     music = pygame.mixer.Sound("data/mario_dies.wav")
@@ -410,4 +425,5 @@ def game_over():
         pygame.display.update()
 
 
+# Запуск игры
 start_game()
