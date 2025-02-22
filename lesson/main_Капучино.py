@@ -1,13 +1,4 @@
-from PyQt5.QtWidgets import (
-    QApplication,
-    QWidget,
-    QVBoxLayout,
-    QTextEdit,
-    QLabel,
-    QPushButton,
-    QHBoxLayout,
-    QMessageBox,
-)
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QLabel, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5 import uic
 import sqlite3, sys
 
